@@ -164,7 +164,8 @@ Since I don't have written a suitable Gradle task yet, you have to execute the f
 # (1) Start the RabbitMQ Server
 rabbitmq-server
 # (2) Start the server written in Perl
-perl src/main/perl/RPCServer.pl
+cd src/main/perl
+perl RPCServer.pl
 # (3) Run the client written in Java
 gradle run
 ```
