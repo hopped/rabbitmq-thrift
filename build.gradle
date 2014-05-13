@@ -15,3 +15,57 @@ dependencies {
     compile 'org.apache.thrift:libthrift:0.9.0'
     compile 'com.rabbitmq:amqp-client:3.2.4'
 }
+
+def thriftBinary = 'thrift'
+def generatedJavaDir = "$buildDir/generated-src/main/java"
+def generatedPerlDir = "src/main/perl"
+
+task generateJavaFromThrift {
+    ext.inputFiles = fileTree(dir: 'src/main/resources').matching {
+        include '*.thrift'
+    }
+    ext.outputDir = file(generatedJavaDir)
+    inputs.file inputFiles
+    outputs.dir outputDir
+    doFirst {
+        outputDir.exists() || outputDir.mkdirs()
+        inputFiles.each { File file ->
+            exec {
+                executable = thriftBinary
+                args = ['--gen', 'java', '--out', outputDir, file]
+            }
+        }
+    }
+}
+
+task generatePerlFromThrift {
+    ext.inputFiles = fileTree(dir: 'src/main/resources').matching {
+        include '*.thrift'
+    }
+    ext.outputDir = file(generatedPerlDir)
+    inputs.file inputFiles
+    outputs.dir outputDir
+    doFirst {
+        outputDir.exists() || outputDir.mkdirs()
+        inputFiles.each { File file ->
+            exec {
+                executable = thriftBinary
+                args = ['--gen', 'perl', '--out', outputDir, file]
+            }
+        }
+    }
+}
+
+compileJava.dependsOn generateJavaFromThrift, generatePerlFromThrift
+sourceSets {
+    main {
+        java {
+            srcDir generatedJavaDir
+        }
+    }
+}
+
+clean << {
+    def generated = new File(generatedPerlDir, 'COM_HOPPED')
+    generated.deleteDir()
+}
