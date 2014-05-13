@@ -25,19 +25,16 @@ use strict;
 use warnings;
 
 use AnyEvent;
+use DBI;
 use Net::RabbitFoot;
-use lib qw(
-    blib/lib
-    blib/arch/auto/Types
-);
+
 use COM_HOPPED::Runner::Thrift::Types;
+use RunnerDB;
 
 use Thrift;
 use Thrift::BinaryProtocol;
 use Thrift::MemoryBuffer;
 
-use RunnerDB;
-use DBI;
 
 # (1) Initialize the connection to RabbitMQ using the 'running_queue'
 my $Connection = Net::RabbitFoot->new()->load_xml_spec()->connect(
