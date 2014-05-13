@@ -238,7 +238,6 @@ Please [create](https://github.com/hopped/rabbitmq-thrift/issues) an issue.
 
 ## TODO
 
-- Generate Java and Perl modules by Thrift automatically as a Gradle task during build
 - Test cases
 
 
