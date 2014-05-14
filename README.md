@@ -7,7 +7,7 @@ to interchange data between Perl and Java via [RabbitMQ][rabbitmq] in RPC mode. 
 ## Motivation
 Since one hardly finds any examples of using [RabbitMQ][rabbitmq] in connection with [Apache Thrift][thrift] for Perl, I decided to write a small example of using RabbitMQ in [RPC mode][rpc] to interchange data serialized with Thrift between Perl and Java.
 
-This tutorial will be part of a ''greater'' series using other data-interchange
+This tutorial is part of a ''greater'' series using other data-interchange
 formats such as [Google Protocol Buffers][protobuf] and [Apache Avro][avro].
 
 
@@ -123,7 +123,7 @@ For users that have Thrift already installed, and just missing the Perl extensio
 
 ## Installation
 
-This section assumes that you've successfully installed RabbitMQ, Protobuf, Protobuf for Perl/XS, and that you are able to compile Protbuf definitions for Perl and Java.
+This section assumes that you've successfully installed RabbitMQ, Apache Thrift, Thrift for Perl, and that you are able to compile Thrift definitions for Perl and Java.
 
 First, clone the repository:
 
